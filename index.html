@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Moon! 🌙✨</title>
+  <meta name="description" content="A special birthday surprise for the most beautiful girl">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    /* ============================================
+       ROOT DESIGN SYSTEM
+       ============================================ */
+    :root {
+      --bg-cream: #FFFDFB;
+      --bg-warm: #FFF8F5;
+      --pastel-pink: #FFEBE8;
+      --pastel-pink-deep: #FFD6D1;
+      --rose-gold-light: #F7D6C8;
+      --rose-gold: #E5A9A9;
+      --rose-gold-mid: #C87A80;
+      --rose-gold-dark: #AE5866;
+      --gold-warm: #E5C384;
+      --gold-deep: #C9A84C;
+      --text-coffee: #5E3D3A;
+      --text-muted: #8E6D6A;
+      --glass-bg: rgba(255, 255, 255, 0.5);
+      --glass-border: rgba(229, 169, 169, 0.35);
+      --shadow-card: 0 15px 40px rgba(229, 169, 169, 0.18);
+      --shadow-deep: 0 25px 60px rgba(94, 61, 58, 0.15);
+      --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(160deg, #FFFDFB 0%, #FFF3F0 40%, #FFEBE8 100%);
+      color: var(--text-coffee);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-cream); }
+    ::-webkit-scrollbar-thumb { background: var(--rose-gold); border-radius: 3px; }
+
+    /* ============================================
+       SPARKLE CURSOR CANVAS
+       ============================================ */
+    #sparkle-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 99999;
+    }
+
+    /* ============================================
+       FLOATING PARTICLES
+       ============================================ */
+    .particle {
+      position: fixed; pointer-events: none; z-index: 1;
+      animation: particleFloat 10s linear infinite;
+      opacity: 0;
+    }
+    @keyframes particleFloat {
+      0% { transform: translateY(105vh) translateX(0) rotate(0deg) scale(0.4); opacity: 0; }
+      8% { opacity: 0.5; }
+      92% { opacity: 0.5; }
+      100% { transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg) scale(1); opacity: 0; }
+    }
+
+    /* ============================================
+       SCREEN 1: COLLEGE BUILDING ENTRANCE
+       ============================================ */
+    .screen {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      z-index: 100;
+    }
+
+    .screen.hidden {
+      opacity: 0; pointer-events: none;
+      transform: scale(1.1);
+    }
+
+    #college-screen {
+      background: linear-gradient(180deg, #D4E8F7 0%, #F0E5D8 60%, #E8D5C4 100%);
+      z-index: 500;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .college-sky {
+      position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+      background: linear-gradient(180deg, #B8D8F0 0%, #E8D8CC 100%);
+    }
+
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 50px;
+      opacity: 0.7;
+      animation: cloudDrift 20s linear infinite;
+    }
+    .cloud-1 { width: 120px; height: 40px; top: 10%; left: -120px; animation-duration: 25s; }
+    .cloud-2 { width: 80px; height: 30px; top: 20%; left: -80px; animation-duration: 18s; animation-delay: 5s; }
+    .cloud-3 { width: 100px; height: 35px; top: 8%; left: -100px; animation-duration: 22s; animation-delay: 10s; }
+    @keyframes cloudDrift {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(100vw + 200px)); }
+    }
+
+    .college-building {
+      position: relative;
+      z-index: 10;
+      width: 85%;
+      max-width: 500px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      animation: buildingFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes buildingFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .college-building:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+    }
+
+    .college-building img {
+      width: 100%; height: auto; display: block;
+    }
+
+    .college-name-banner {
+      position: relative;
+      z-index: 10;
+      margin-top: 20px;
+      background: linear-gradient(135deg, var(--gold-warm) 0%, var(--gold-deep) 100%);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(16px, 3.5vw, 22px);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+      text-align: center;
+      animation: bannerGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes bannerGlow {
+      0% { box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4); }
+      100% { box-shadow: 0 8px 35px rgba(201, 168, 76, 0.7), 0 0 15px rgba(229, 195, 132, 0.3); }
+    }
+
+    .click-hint {
+      position: relative; z-index: 10;
+      margin-top: 20px;
+      font-size: 14px; font-weight: 500;
+      color: var(--text-muted);
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes hintPulse {
+      0%, 100% { opacity: 0.6; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(5px); }
+    }
+
+    /* ============================================
+       SCREEN 2: LOCK SCREEN (PADLOCK OVERLAY)
+       ============================================ */
+    #lock-screen {
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      z-index: 600;
+    }
+
+    .lock-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: var(--shadow-deep), 0 0 50px rgba(255, 235, 232, 0.5);
+      animation: lockSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes lockSlideIn {
+      0% { transform: scale(0.7) translateY(30px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .padlock {
+      font-size: 70px;
+      margin-bottom: 15px;
+      display: inline-block;
+      animation: padlockSwing 2s ease-in-out infinite;
+      filter: drop-shadow(0 5px 15px rgba(229, 195, 132, 0.5));
+    }
+
+    @keyframes padlockSwing {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    .lock-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .lock-card .hint {
+      font-size: 13px; color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    .lock-input {
+      width: 100%; padding: 14px 20px;
+      border: 2px solid var(--rose-gold-light);
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.8);
+      font-family: inherit; font-size: 18px;
+      text-align: center; letter-spacing: 3px;
+      color: var(--text-coffee);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .lock-input:focus {
+      border-color: var(--rose-gold-mid);
+      background: white;
+      box-shadow: 0 0 20px rgba(200, 122, 128, 0.2);
+    }
+
+    .lock-btn {
+      width: 100%; padding: 14px;
+      margin-top: 12px;
+      border: none; border-radius: 50px;
+      background: linear-gradient(135deg, var(--rose-gold) 0%, var(--rose-gold-mid) 100%);
+      color: white; font-family: inherit;
+      font-weight: 600; font-size: 16px;
+      cursor: pointer; letter-spacing: 1px;
+      box-shadow: 0 8px 25px rgba(200, 122, 128, 0.35);
+      transition: var(--transition);
+    }
+
+    .lock-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(200, 122, 128, 0.5);
+    }
+
+    .error-msg {
+      color: var(--rose-gold-dark); font-size: 14px;
+      font-weight: 500; margin-top: 12px;
+      opacity: 0; transform: translateY(-5px);
+      transition: var(--transition);
+    }
+
+    .error-msg.show {
+      opacity: 1; transform: translateY(0);
+      animation: shakeError 0.4s ease;
+    }
+
+    @keyframes shakeError {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    /* ============================================
+       SCREEN 3: CLASSROOM
+       ============================================ */
+    #classroom-screen {
+      background: linear-gradient(180deg, #F5EDE8 0%, #FFF8F5 100%);
+      z-index: 400;
+      overflow-y: auto;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 30px 15px;
+    }
+
+    .classroom-container {
+      width: 100%; max-width: 700px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 20px;
+      padding-bottom: 30px;
+    }
+
+    .classroom-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(24px, 5vw, 36px);
+      color: var(--text-coffee);
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .classroom-subtitle {
+      font-size: 13px; color: var(--text-muted);
+      text-align: center; margin-bottom: 10px;
+    }
+
+    /* Blackboard */
+    .blackboard {
+      width: 90%; max-width: 450px;
+      background: #2E5A44;
+      border: 8px solid #7B5438;
+      border-radius: 8px;
+      padding: 20px 15px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2),
+                  inset 0 0 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .blackboard::before {
+      content: "";
+      position: absolute; bottom: -20px;
+      left: 10%; width: 80%; height: 10px;
+      background: #7B5438;
+      border-radius: 0 0 4px 4px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .chalk-text {
+      font-family: 'Caveat', cursive;
+      color: #E2ECDB;
+      font-size: clamp(18px, 4vw, 26px);
+      text-shadow: 0 0 8px rgba(226, 236, 219, 0.3);
+      line-height: 1.4;
+    }
+
+    .chalk-small {
+      font-size: clamp(12px, 2.5vw, 15px);
+      color: #b7d4ae;
+      margin-top: 5px;
+    }
+
+    /* Desk Grid */
+    .desk-area {
+      width: 100%; max-width: 500px;
+      margin-top: 25px;
+    }
+
+    .row-labels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .row-label {
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    .desk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .desk {
+      aspect-ratio: 1.5;
+      background: rgba(255, 255, 255, 0.55);
+      border: 2px solid rgba(229, 169, 169, 0.2);
+      border-radius: 12px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      box-shadow: 0 3px 8px rgba(229, 169, 169, 0.06);
+    }
+
+    .desk::after {
+      content: "";
+      position: absolute; top: 5px;
+      width: 70%; height: 3px;
+      background: rgba(229, 169, 169, 0.15);
+      border-radius: 2px;
+    }
+
+    .desk:hover {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: var(--rose-gold);
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 20px rgba(229, 169, 169, 0.15);
+    }
+
+    .desk.me-spot {
+      background: linear-gradient(135deg, #FFF5E6 0%, #FFEFEA 100%);
+      border: 2.5px solid var(--gold-warm);
+      box-shadow: 0 6px 20px rgba(229, 195, 132, 0.35),
+                  inset 0 0 12px rgba(229, 195, 132, 0.1);
+      animation: deskPulse 2.5s ease-in-out infinite;
+    }
+
+    .desk.bestie-spot {
+      background: linear-gradient(135deg, #FFF1EE 0%, #FFE6E2 100%);
+      border: 2.5px solid var(--rose-gold-mid);
+      box-shadow: 0 6px 20px rgba(200, 122, 128, 0.35),
+                  inset 0 0 12px rgba(200, 122, 128, 0.1);
+      animation: deskPulse 2.5s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes deskPulse {
+      0%, 100% { box-shadow: 0 6px 20px rgba(200, 122, 128, 0.25); }
+      50% { box-shadow: 0 6px 30px rgba(200, 122, 128, 0.5), 0 0 15px rgba(200, 122, 128, 0.15); }
+    }
+
+    .desk-emoji {
+      font-size: clamp(18px, 4vw, 24px);
+      animation: miniBounce 1.8s ease-in-out infinite;
+    }
+
+    @keyframes miniBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .desk-name {
+      font-size: clamp(8px, 2vw, 10px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .desk.me-spot .desk-name { color: #9E742E; }
+    .desk.bestie-spot .desk-name { color: var(--rose-gold-dark); }
+
+    .classroom-hint {
+      font-size: 13px; color: var(--text-muted);
+      font-weight: 500; text-align: center;
+      margin-top: 15px;
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+
+    /* ============================================
+       SCREEN 4: OPEN BOOK OVERLAY
+       ============================================ */
+    #book-overlay {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 800;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
+      padding: 20px;
+    }
+
+    #book-overlay.show {
+      opacity: 1; pointer-events: all;
+    }
+
+    .book {
+      width: 90%; max-width: 800px;
+      display: flex;
+      perspective: 1500px;
+      animation: bookSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes bookSlideIn {
+      0% { transform: scale(0.6) rotateY(-20deg); opacity: 0; }
+      100% { transform: scale(1) rotateY(0); opacity: 1; }
+    }
+
+    .book-page {
+      flex: 1;
+      min-height: 400px;
+      padding: 30px 25px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative;
+    }
+
+    .page-left {
+      background: linear-gradient(135deg, #FFF9F5 0%, #FFF3EE 100%);
+      border-radius: 12px 0 0 12px;
+      border: 1px solid rgba(229, 169, 169, 0.2);
+      border-right: none;
+      box-shadow: -5px 5px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .page-right {
+      background: linear-gradient(135deg, #FFF3EE 0%, #FFEDE8 100%);
+      border-radius: 0 12px 12px 0;
+      border: 1px solid rgba(229, 169, 169, 0.2);
+      border-left: 1px solid rgba(229, 169, 169, 0.15);
+      box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Book spine shadow */
+    .page-left::after {
+      content: "";
+      position: absolute; right: 0; top: 5%;
+      width: 15px; height: 90%;
+      background: linear-gradient(to left, rgba(0,0,0,0.06), transparent);
+    }
+
+    .page-right::before {
+      content: "";
+      position: absolute; left: 0; top: 5%;
+      width: 15px; height: 90%;
+      background: linear-gradient(to right, rgba(0,0,0,0.06), transparent);
+    }
+
+    .book-photo {
+      width: 85%; max-width: 250px;
+      aspect-ratio: 3/4;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(94, 61, 58, 0.15);
+      border: 4px solid white;
+      margin-bottom: 15px;
+    }
+
+    .book-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .book-photo-label {
+      font-family: 'Caveat', cursive;
+      font-size: 18px; color: var(--text-muted);
+      text-align: center;
+    }
+
+    .book-letter {
+      text-align: center;
+      padding: 10px;
+    }
+
+    .book-letter-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(20px, 3.5vw, 28px);
+      color: var(--rose-gold-dark);
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+
+    .book-letter-body {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(16px, 3vw, 22px);
+      color: var(--text-coffee);
+      line-height: 1.6;
+    }
+
+    .book-letter-sig {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(18px, 3vw, 24px);
+      color: var(--rose-gold-mid);
+      margin-top: 20px;
+    }
+
+    .book-close-btn {
+      position: absolute; top: -15px; right: -15px;
+      width: 40px; height: 40px;
+      background: var(--rose-gold-mid);
+      color: white; border: none; border-radius: 50%;
+      font-size: 20px; cursor: pointer;
+      box-shadow: 0 4px 15px rgba(200, 122, 128, 0.4);
+      transition: var(--transition);
+      z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .book-close-btn:hover {
+      transform: scale(1.15) rotate(90deg);
+      background: var(--rose-gold-dark);
+    }
+
+    .continue-btn {
+      margin-top: 20px;
+      padding: 12px 30px;
+      border: none; border-radius: 50px;
+      background: linear-gradient(135deg, var(--rose-gold) 0%, var(--rose-gold-mid) 100%);
+      color: white; font-family: inherit;
+      font-weight: 600; font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(200, 122, 128, 0.35);
+      transition: var(--transition);
+      letter-spacing: 0.5px;
+    }
+
+    .continue-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(200, 122, 128, 0.5);
+    }
+
+    /* ============================================
+       MAIN BIRTHDAY CONTENT (Scrollable)
+       ============================================ */
+    #birthday-page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center;
+      padding: 40px 15px 60px 15px;
+      position: relative; z-index: 10;
+    }
+
+    #birthday-page.hidden {
+      display: none;
+    }
+
+    .content-wrapper {
+      width: 100%; max-width: 900px;
+      display: flex; flex-direction: column;
+      gap: 50px;
+    }
+
+    /* Section Shared Styles */
+    .section-header {
+      text-align: center; margin-bottom: 25px;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 4.5vw, 32px);
+      font-weight: 700; margin-bottom: 8px;
+    }
+
+    .section-header p {
+      font-size: 14px; color: var(--text-muted);
+    }
+
+    /* Birthday Header */
+    .bday-header {
+      text-align: center;
+    }
+
+    .bday-header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(36px, 6.5vw, 58px);
+      color: var(--text-coffee);
+      line-height: 1.2;
+      text-shadow: 2px 2px 0 rgba(255,255,255,0.8);
+      animation: headerFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes headerFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Age Ticker */
+    .ticker-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 25px 15px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+    }
+
+    .ticker-label {
+      font-size: 13px; text-transform: uppercase;
+      letter-spacing: 2px; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 15px;
+    }
+
+    .ticker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+      gap: 10px; max-width: 600px; margin: 0 auto;
+    }
+
+    .tick-box {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(229,169,169,0.15);
+      border-radius: 14px; padding: 10px 6px;
+      transition: var(--transition);
+    }
+
+    .tick-box:hover {
+      transform: translateY(-3px);
+      border-color: var(--rose-gold);
+    }
+
+    .tick-val {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 700; color: var(--rose-gold-dark);
+    }
+
+    .tick-lbl {
+      font-size: 10px; font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase; margin-top: 3px;
+    }
+
+    /* ============================================
+       GIFT BOXES
+       ============================================ */
+    .gifts-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .gift-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 30px 18px;
+      min-height: 260px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      cursor: pointer; position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+
+    .gift-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(229,169,169,0.25);
+    }
+
+    .gift-card:hover .gift-icon {
+      animation: shakeGift 0.5s infinite ease-in-out;
+    }
+
+    @keyframes shakeGift {
+      0%, 100% { transform: rotate(0); }
+      25% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+    }
+
+    .gift-icon {
+      font-size: 60px; margin-bottom: 20px;
+      filter: drop-shadow(0 5px 10px rgba(229,169,169,0.3));
+      transition: var(--transition);
+    }
+
+    .gift-label {
+      font-size: 14px; font-weight: 600;
+      color: var(--rose-gold-dark);
+      transition: var(--transition);
+    }
+
+    .gift-msg {
+      position: absolute; padding: 20px;
+      text-align: center;
+      opacity: 0; transform: scale(0.7);
+      transition: var(--transition);
+    }
+
+    .gift-msg h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px; color: var(--rose-gold-dark);
+      margin-bottom: 10px;
+    }
+
+    .gift-msg p {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .gift-card.opened {
+      background: #FFF1EE;
+      border-color: rgba(229,169,169,0.5);
+    }
+
+    .gift-card.opened .gift-icon {
+      transform: scale(0) translateY(-80px);
+      opacity: 0;
+    }
+
+    .gift-card.opened .gift-label {
+      opacity: 0; transform: translateY(20px);
+    }
+
+    .gift-card.opened .gift-msg {
+      opacity: 1; transform: scale(1);
+    }
+
+    /* ============================================
+       MEMORY LANE POLAROIDS
+       ============================================ */
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 25px;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 12px 12px 22px 12px;
+      box-shadow: 0 10px 30px rgba(94,61,58,0.08);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.5s cubic-bezier(0.165,0.84,0.44,1);
+    }
+
+    .polaroid:nth-child(1) { transform: rotate(-2.5deg); }
+    .polaroid:nth-child(2) { transform: rotate(1.5deg); }
+    .polaroid:nth-child(3) { transform: rotate(-1deg); }
+    .polaroid:nth-child(4) { transform: rotate(2.5deg); }
+
+    .polaroid:hover {
+      transform: scale(1.06) rotate(0deg) translateY(-10px) !important;
+      box-shadow: 0 20px 45px rgba(94,61,58,0.18);
+      z-index: 20;
+    }
+
+    .polaroid-img {
+      width: 100%; aspect-ratio: 1;
+      background: #EDE7E4;
+      border-radius: 2px; overflow: hidden;
+      position: relative;
+    }
+
+    .polaroid-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+
+    .polaroid-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 18px; color: var(--text-coffee);
+      text-align: center; margin-top: 12px;
+    }
+
+    /* ============================================
+       BUCKET LIST
+       ============================================ */
+    .bucket-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 30px 20px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .bucket-list {
+      display: flex; flex-direction: column;
+      gap: 14px; max-width: 580px; margin: 0 auto;
+    }
+
+    .bucket-item {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(229,169,169,0.12);
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex; align-items: center; gap: 14px;
+      cursor: pointer; user-select: none;
+      transition: var(--transition);
+    }
+
+    .bucket-item:hover {
+      transform: translateY(-2px);
+      border-color: var(--rose-gold);
+    }
+
+    .bucket-check {
+      width: 26px; height: 26px;
+      border: 2px solid var(--rose-gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: transparent; font-size: 13px;
+      background: white; flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .bucket-text {
+      font-size: 14px; font-weight: 500;
+      color: var(--text-coffee);
+      transition: var(--transition);
+    }
+
+    .bucket-item.done .bucket-check {
+      background: linear-gradient(135deg, var(--rose-gold), var(--rose-gold-mid));
+      border-color: var(--rose-gold-mid);
+      color: white;
+      box-shadow: 0 4px 12px rgba(200,122,128,0.3);
+    }
+
+    .bucket-item.done .bucket-text {
+      color: var(--text-muted);
+      text-decoration: line-through;
+      font-style: italic;
+    }
+
+    /* ============================================
+       Q&A SECTION
+       ============================================ */
+    .qa-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 35px 25px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .qa-list {
+      display: flex; flex-direction: column;
+      gap: 25px; max-width: 600px; margin: 0 auto;
+    }
+
+    .qa-item label {
+      display: block;
+      font-family: 'Caveat', cursive;
+      font-size: 20px; font-weight: 700;
+      color: var(--text-coffee);
+      margin-bottom: 10px;
+    }
+
+    .qa-item textarea {
+      width: 100%; min-height: 100px;
+      padding: 15px 18px;
+      border: 2px solid rgba(229,169,169,0.2);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.7);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px; color: var(--text-coffee);
+      resize: vertical; outline: none;
+      transition: var(--transition);
+      background-image: repeating-linear-gradient(
+        transparent, transparent 27px, rgba(229,169,169,0.12) 28px
+      );
+      line-height: 28px;
+      background-position-y: 15px;
+    }
+
+    .qa-item textarea:focus {
+      border-color: var(--rose-gold);
+      background-color: white;
+      box-shadow: 0 0 20px rgba(229,169,169,0.15);
+    }
+
+    .qa-item textarea::placeholder {
+      color: var(--rose-gold-light);
+      font-style: italic;
+    }
+
+    /* ============================================
+       MUSIC WIDGET
+       ============================================ */
+    .music-widget {
+      position: fixed; bottom: 20px; right: 20px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      padding: 8px 16px;
+      box-shadow: var(--shadow-card);
+      z-index: 900;
+      display: flex; align-items: center; gap: 8px;
+      transition: var(--transition);
+    }
+
+    .music-widget:hover { transform: translateY(-3px); }
+
+    .music-btn {
+      background: linear-gradient(135deg, var(--rose-gold), var(--rose-gold-mid));
+      color: white; border: none;
+      padding: 7px 14px; border-radius: 30px;
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+      transition: var(--transition);
+    }
+
+    .music-bars {
+      display: flex; align-items: flex-end; gap: 2px; height: 14px;
+    }
+
+    .m-bar {
+      width: 3px; height: 2px;
+      background: var(--rose-gold-mid);
+      border-radius: 2px;
+    }
+
+    .m-bar.active {
+      animation: barBounce 0.7s ease infinite alternate;
+    }
+
+    .m-bar:nth-child(1) { animation-delay: 0s; }
+    .m-bar:nth-child(2) { animation-delay: 0.15s; }
+    .m-bar:nth-child(3) { animation-delay: 0.1s; }
+    .m-bar:nth-child(4) { animation-delay: 0.25s; }
+
+    @keyframes barBounce {
+      0% { height: 2px; }
+      100% { height: 14px; }
+    }
+
+    /* Footer */
+    .site-footer {
+      text-align: center;
+      padding: 40px 20px 50px;
+      font-size: 13px; color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .site-footer span { color: var(--rose-gold-dark); font-size: 16px; }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 600px) {
+      .book {
+        flex-direction: column;
+        max-width: 350px;
+      }
+      .page-left {
+        border-radius: 12px 12px 0 0;
+        border-right: 1px solid rgba(229,169,169,0.2);
+        border-bottom: none;
+      }
+      .page-right {
+        border-radius: 0 0 12px 12px;
+        border-left: 1px solid rgba(229,169,169,0.2);
+        border-top: 1px solid rgba(229,169,169,0.15);
+      }
+      .page-left::after, .page-right::before {
+        display: none;
+      }
+      .book-page { min-height: 300px; padding: 25px 15px; }
+      .college-building { width: 90%; }
+      .desk-grid { gap: 6px; }
+      .desk-emoji { font-size: 16px; }
+      .desk-name { font-size: 7px; }
+      .music-widget { bottom: 12px; right: 12px; padding: 6px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="sparkle-canvas"></canvas>
+
+  <!-- =============================================
+       SCREEN 1: COLLEGE BUILDING ENTRANCE
+       ============================================= -->
+  <div id="college-screen" class="screen" onclick="showLock()">
+    <div class="college-sky">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+    </div>
+    <div class="college-building">
+      <img src="tapasya-college.png" alt="Tapasya Junior College">
+    </div>
+    <div class="college-name-banner">🏫 Tapasya Junior College</div>
+    <div class="click-hint">👆 Tap the college to enter</div>
+  </div>
+
+  <!-- =============================================
+       SCREEN 2: LOCK SCREEN (PADLOCK)
+       ============================================= -->
+  <div id="lock-screen" class="screen hidden">
+    <div class="lock-card">
+      <div class="padlock">🔒</div>
+      <h2>The Gate is Locked!</h2>
+      <p class="hint">Enter her birthdate to unlock 🎂 (DDMMYYYY)</p>
+      <form onsubmit="checkPassword(event)">
+        <input type="text" id="pwd-input" class="lock-input"
+               placeholder="DDMMYYYY" maxlength="10"
+               autocomplete="off" inputmode="numeric"
+               oninput="clearError()">
+        <button type="submit" class="lock-btn">Unlock the Gate 💖</button>
+      </form>
+      <div id="pwd-error" class="error-msg">Oops! Not quite right 🥺 Try again!</div>
+    </div>
+  </div>
+
+  <!-- =============================================
+       SCREEN 3: CLASSROOM
+       ============================================= -->
+  <div id="classroom-screen" class="screen hidden">
+    <div class="classroom-container">
+      <div class="classroom-title">The Classroom Where We Met... 💫</div>
+      <div class="classroom-subtitle">Click on the highlighted desks to discover the magic ✨</div>
+
+      <div class="blackboard">
+        <div class="chalk-text">Welcome to Our Class! 📝</div>
+        <div class="chalk-small">— where the best friendship in history began —</div>
+      </div>
+
+      <div class="desk-area">
+        <div class="row-labels">
+          <div class="row-label">Row 1 (Left)</div>
+          <div class="row-label">Row 2 (Middle)</div>
+          <div class="row-label">Row 3 (Right)</div>
+        </div>
+        <div class="desk-grid" id="desk-grid">
+          <!-- Generated by JS -->
+        </div>
+      </div>
+
+      <div class="classroom-hint" id="classroom-hint">
+        👆 Tap on the glowing desks at the back!
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================
+       SCREEN 4: OPEN BOOK OVERLAY
+       ============================================= -->
+  <div id="book-overlay">
+    <div class="book" style="position:relative;">
+      <button class="book-close-btn" onclick="closeBook()">✕</button>
+
+      <!-- Left Page: Childhood Photo -->
+      <div class="book-page page-left">
+        <div class="book-photo">
+          <img src="bestie-childhood.jpg" alt="Little Moon">
+        </div>
+        <div class="book-photo-label">Little Moon 🌙 — then</div>
+      </div>
+
+      <!-- Right Page: Grown-up Photo + Letter -->
+      <div class="book-page page-right">
+        <div class="book-photo">
+          <img src="bestie-grownup.jpg" alt="Beautiful Moon">
+        </div>
+        <div class="book-letter" style="margin-top: 15px;">
+          <div class="book-letter-body">
+            Happy Birthday to the<br>most beautiful girl 🌸
+          </div>
+          <div class="book-letter-title" style="margin-top: 8px;">
+            Moon 🌙, Piggu 🐷
+          </div>
+          <div class="book-letter-sig">
+            — from your Aditya ❤️
+          </div>
+        </div>
+        <button class="continue-btn" onclick="goToBirthday()">
+          Continue to Surprises 🎉
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================
+       MAIN BIRTHDAY PAGE (Initially hidden)
+       ============================================= -->
+  <div id="birthday-page" class="hidden">
+    <div class="content-wrapper">
+
+      <!-- HEADER -->
+      <div class="bday-header">
+        <h1>Happy Birthday, Moon! 🌙🎉</h1>
+      </div>
+
+      <!-- LIVE AGE TICKER -->
+      <div class="ticker-card">
+        <div class="ticker-label">Time you've made the world brighter ✨</div>
+        <div class="ticker-grid">
+          <div class="tick-box">
+            <div class="tick-val" id="t-yrs">00</div>
+            <div class="tick-lbl">Years</div>
+          </div>
+          <div class="tick-box">
+            <div class="tick-val" id="t-mos">00</div>
+            <div class="tick-lbl">Months</div>
+          </div>
+          <div class="tick-box">
+            <div class="tick-val" id="t-days">00</div>
+            <div class="tick-lbl">Days</div>
+          </div>
+          <div class="tick-box">
+            <div class="tick-val" id="t-hrs">00</div>
+            <div class="tick-lbl">Hours</div>
+          </div>
+          <div class="tick-box">
+            <div class="tick-val" id="t-min">00</div>
+            <div class="tick-lbl">Mins</div>
+          </div>
+          <div class="tick-box">
+            <div class="tick-val" id="t-sec">00</div>
+            <div class="tick-lbl">Secs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GIFT BOXES -->
+      <section>
+        <div class="section-header">
+          <h2>Open Your Birthday Gifts 🎁</h2>
+          <p>I wrapped 3 sweet compliments for you — tap to unwrap!</p>
+        </div>
+        <div class="gifts-row">
+          <div class="gift-card" onclick="openGift(this)">
+            <div class="gift-icon">🎁</div>
+            <div class="gift-label">Unwrap Me ✨</div>
+            <div class="gift-msg">
+              <h3>Kindest Soul 💖</h3>
+              <p>You're the sweetest, most caring person I know. Thank you for always listening, Moon!</p>
+            </div>
+          </div>
+          <div class="gift-card" onclick="openGift(this)">
+            <div class="gift-icon">🎀</div>
+            <div class="gift-label">Unwrap Me ✨</div>
+            <div class="gift-msg">
+              <h3>Endless Sunshine ☀️</h3>
+              <p>Your smile literally lights up the whole classroom. Never stop being this radiant!</p>
+            </div>
+          </div>
+          <div class="gift-card" onclick="openGift(this)">
+            <div class="gift-icon">💝</div>
+            <div class="gift-label">Unwrap Me ✨</div>
+            <div class="gift-msg">
+              <h3>Bestie For Life 🧸</h3>
+              <p>From desk giggles to real-life adventures — I'm so lucky to have you, Piggu!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MEMORY LANE -->
+      <section>
+        <div class="section-header">
+          <h2>Our Memory Lane 📸</h2>
+          <p>The classroom moments we'll never forget</p>
+        </div>
+        <div class="polaroid-grid">
+          <div class="polaroid" onclick="popConfetti(this)">
+            <div class="polaroid-img">
+              <img src="memory1.png" alt="Classroom desk giggles">
+            </div>
+            <div class="polaroid-caption">Desk giggles ✏️</div>
+          </div>
+          <div class="polaroid" onclick="popConfetti(this)">
+            <div class="polaroid-img">
+              <img src="memory2.png" alt="Blackboard doodles">
+            </div>
+            <div class="polaroid-caption">Blackboard doodles 🎨</div>
+          </div>
+          <div class="polaroid" onclick="popConfetti(this)">
+            <div class="polaroid-img">
+              <img src="memory3.png" alt="Hallway chats">
+            </div>
+            <div class="polaroid-caption">Hallway chats 🎒</div>
+          </div>
+          <div class="polaroid" onclick="popConfetti(this)">
+            <div class="polaroid-img">
+              <img src="memory4.png" alt="Library high-fives">
+            </div>
+            <div class="polaroid-caption">Library high-fives 📚</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BUCKET LIST -->
+      <section>
+        <div class="section-header">
+          <h2>Bestie Bucket List 📝</h2>
+          <p>Things we absolutely must do together! Tap to check off</p>
+        </div>
+        <div class="bucket-card">
+          <div class="bucket-list">
+            <div class="bucket-item" onclick="toggleBucket(this)">
+              <div class="bucket-check">♥</div>
+              <div class="bucket-text">A spontaneous road trip with zero planning 🚗</div>
+            </div>
+            <div class="bucket-item" onclick="toggleBucket(this)">
+              <div class="bucket-check">♥</div>
+              <div class="bucket-text">Late-night cafe run for giant milkshakes ☕</div>
+            </div>
+            <div class="bucket-item" onclick="toggleBucket(this)">
+              <div class="bucket-check">♥</div>
+              <div class="bucket-text">Recreate our legendary chalkboard doodles 🎨</div>
+            </div>
+            <div class="bucket-item" onclick="toggleBucket(this)">
+              <div class="bucket-check">♥</div>
+              <div class="bucket-text">Write the next chapter of our inside jokes 😂</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q&A SECTION -->
+      <section>
+        <div class="section-header">
+          <h2>A Few Questions For You, Moon 🌙</h2>
+          <p>Your answers will help Aditya be an even better bestie 💖</p>
+        </div>
+        <div class="qa-card">
+          <div class="qa-list">
+            <div class="qa-item">
+              <label>🎁 What gift should I give you this year, Moon?</label>
+              <textarea placeholder="Write your dream gift here..."></textarea>
+            </div>
+            <div class="qa-item">
+              <label>✨ What things should I upgrade or change about myself?</label>
+              <textarea placeholder="Be honest, Piggu! I can handle it 😄"></textarea>
+            </div>
+            <div class="qa-item">
+              <label>💭 What's one thing you've always wanted to tell me?</label>
+              <textarea placeholder="This is your safe space, Moon..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        Made with <span>♥</span> by Aditya for his Moon 🌙<br>
+        Happy Birthday, Bestie! © 2026
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Music Widget (shown after birthday page) -->
+  <div class="music-widget" id="music-widget" style="display:none;">
+    <button class="music-btn" id="music-btn" onclick="toggleMusic()">🎵 Play</button>
+    <div class="music-bars">
+      <div class="m-bar"></div>
+      <div class="m-bar"></div>
+      <div class="m-bar"></div>
+      <div class="m-bar"></div>
+    </div>
+  </div>
+
+  <!-- =============================================
+       JAVASCRIPT
+       ============================================= -->
+  <script>
+    /* -----------------------------------------------
+       CONFIGURATION — Easy to change!
+       ----------------------------------------------- */
+    // CHANGE THIS: Her birthdate password in DDMMYYYY
+    const CORRECT_PASSWORD = "12072008";
+
+    // CHANGE THIS: Her actual birth date for the live counter
+    const BIRTH_DATE = new Date("2008-07-12T00:00:00");
+
+    /* -----------------------------------------------
+       SCREEN 1 → SCREEN 2: Show Lock
+       ----------------------------------------------- */
+    function showLock() {
+      document.getElementById('lock-screen').classList.remove('hidden');
+      // Focus the input
+      setTimeout(() => document.getElementById('pwd-input').focus(), 400);
+    }
+
+    /* -----------------------------------------------
+       SCREEN 2: Password Check
+       ----------------------------------------------- */
+    function checkPassword(e) {
+      e.preventDefault();
+      const val = document.getElementById('pwd-input').value.replace(/[-\/]/g, '').trim();
+
+      if (val === CORRECT_PASSWORD) {
+        // SUCCESS! Epic confetti
+        triggerEpicConfetti();
+
+        // Change padlock to unlocked
+        document.querySelector('.padlock').textContent = '🔓';
+
+        // Transition to classroom after delay
+        setTimeout(() => {
+          document.getElementById('lock-screen').classList.add('hidden');
+          document.getElementById('college-screen').classList.add('hidden');
+          document.getElementById('classroom-screen').classList.remove('hidden');
+        }, 1200);
+      } else {
+        document.getElementById('pwd-error').classList.add('show');
+      }
+    }
+
+    function clearError() {
+      document.getElementById('pwd-error').classList.remove('show');
+    }
+
+    /* -----------------------------------------------
+       CONFETTI HELPERS
+       ----------------------------------------------- */
+    function triggerEpicConfetti() {
+      confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 },
+        colors: ['#FFEBE8','#E5A9A9','#C87A80','#E5C384','#fff'] });
+      setTimeout(() => {
+        confetti({ particleCount: 80, angle: 60, spread: 60, origin: { x: 0, y: 0.7 },
+          colors: ['#FFEBE8','#E5A9A9','#C87A80'] });
+      }, 300);
+      setTimeout(() => {
+        confetti({ particleCount: 80, angle: 120, spread: 60, origin: { x: 1, y: 0.7 },
+          colors: ['#FFEBE8','#E5A9A9','#C87A80'] });
+      }, 500);
+      setTimeout(() => {
+        confetti({ particleCount: 50, spread: 360, ticks: 80, gravity: 0.7,
+          decay: 0.94, startVelocity: 25, shapes: ['heart'],
+          colors: ['#E5A9A9','#C87A80','#AE5866'] });
+      }, 800);
+    }
+
+    function popConfetti(el) {
+      const r = el.getBoundingClientRect();
+      const x = (r.left + r.width / 2) / window.innerWidth;
+      const y = (r.top + r.height / 2) / window.innerHeight;
+      confetti({ particleCount: 35, spread: 50, origin: { x, y },
+        colors: ['#FFEBE8','#E5A9A9','#C87A80','#E5C384'] });
+    }
+
+    /* -----------------------------------------------
+       SCREEN 3: CLASSROOM DESK GRID
+       ----------------------------------------------- */
+    let bothDesksClicked = { me: false, bestie: false };
+
+    function buildClassroom() {
+      const grid = document.getElementById('desk-grid');
+
+      // 5 benches (rows visually, front to back)
+      // 3 desks per bench (Row 1 left, Row 2 middle, Row 3 right)
+      for (let bench = 1; bench <= 5; bench++) {
+        for (let row = 1; row <= 3; row++) {
+          const desk = document.createElement('div');
+          desk.classList.add('desk');
+          desk.dataset.bench = bench;
+          desk.dataset.row = row;
+
+          if (row === 1 && bench === 5) {
+            // Aditya's spot
+            desk.classList.add('me-spot');
+            desk.innerHTML = `
+              <div class="desk-emoji">🙋‍♂️</div>
+              <div class="desk-name">Aditya</div>
+            `;
+            desk.onclick = () => {
+              if (!bothDesksClicked.me) {
+                bothDesksClicked.me = true;
+                popConfetti(desk);
+                checkBothClicked();
+              }
+            };
+          } else if (row === 2 && bench === 5) {
+            // Bestie's spot
+            desk.classList.add('bestie-spot');
+            desk.innerHTML = `
+              <div class="desk-emoji">🙋‍♀️</div>
+              <div class="desk-name">Moon</div>
+            `;
+            desk.onclick = () => {
+              if (!bothDesksClicked.bestie) {
+                bothDesksClicked.bestie = true;
+                popConfetti(desk);
+                checkBothClicked();
+              }
+            };
+          } else {
+            // Empty desk
+            desk.onclick = () => {
+              const msgs = [
+                "Just an empty desk... we sat cooler than this 😎",
+                "Someone used to nap here during lectures 😴",
+                "Paper airplane launch zone! ✈️",
+                "The snack-sharing spot! 🍫",
+                "Teacher's line of sight... danger zone! 🚨"
+              ];
+              const hint = document.getElementById('classroom-hint');
+              hint.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+            };
+          }
+
+          grid.appendChild(desk);
+        }
+      }
+    }
+
+    function checkBothClicked() {
+      if (bothDesksClicked.me && bothDesksClicked.bestie) {
+        const hint = document.getElementById('classroom-hint');
+        hint.textContent = "✨ You found both desks! Opening Aditya's secret book... 📖";
+
+        setTimeout(() => {
+          triggerEpicConfetti();
+          openBook();
+        }, 1500);
+      } else if (bothDesksClicked.me) {
+        document.getElementById('classroom-hint').textContent =
+          "🎯 Found Aditya's spot! Now find Moon's desk too!";
+      } else if (bothDesksClicked.bestie) {
+        document.getElementById('classroom-hint').textContent =
+          "🎯 Found Moon's spot! Now find Aditya's desk too!";
+      }
+    }
+
+    buildClassroom();
+
+    /* -----------------------------------------------
+       SCREEN 4: BOOK OVERLAY
+       ----------------------------------------------- */
+    function openBook() {
+      document.getElementById('book-overlay').classList.add('show');
+    }
+
+    function closeBook() {
+      document.getElementById('book-overlay').classList.remove('show');
+    }
+
+    function goToBirthday() {
+      // Close book and classroom, show birthday page
+      closeBook();
+
+      setTimeout(() => {
+        document.getElementById('classroom-screen').classList.add('hidden');
+        document.getElementById('birthday-page').classList.remove('hidden');
+        document.getElementById('music-widget').style.display = 'flex';
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+
+        // Start particles & sparkle cursor
+        initParticles();
+        initSparkleCursor();
+
+        // Start age ticker
+        startTicker();
+
+        // Init music
+        musicBox.init();
+      }, 500);
+    }
+
+    /* -----------------------------------------------
+       GIFT BOXES
+       ----------------------------------------------- */
+    function openGift(el) {
+      if (el.classList.contains('opened')) return;
+      el.classList.add('opened');
+      popConfetti(el);
+
+      // All gifts opened?
+      if (document.querySelectorAll('.gift-card.opened').length === 3) {
+        setTimeout(triggerEpicConfetti, 600);
+      }
+    }
+
+    /* -----------------------------------------------
+       BUCKET LIST
+       ----------------------------------------------- */
+    function toggleBucket(el) {
+      el.classList.toggle('done');
+      if (el.classList.contains('done')) {
+        popConfetti(el);
+        const r = el.getBoundingClientRect();
+        confetti({ particleCount: 12, spread: 40,
+          origin: { x: (r.left + r.width/2)/window.innerWidth,
+                    y: (r.top + r.height/2)/window.innerHeight },
+          shapes: ['heart'], scalar: 1.2,
+          colors: ['#E5A9A9','#C87A80','#AE5866'] });
+      }
+    }
+
+    /* -----------------------------------------------
+       LIVE AGE TICKER
+       ----------------------------------------------- */
+    function startTicker() {
+      updateTicker();
+      setInterval(updateTicker, 1000);
+    }
+
+    function updateTicker() {
+      const now = new Date();
+      let y = now.getFullYear() - BIRTH_DATE.getFullYear();
+      let m = now.getMonth() - BIRTH_DATE.getMonth();
+      let d = now.getDate() - BIRTH_DATE.getDate();
+
+      if (d < 0) {
+        const prev = new Date(now.getFullYear(), now.getMonth(), 0);
+        d += prev.getDate(); m--;
+      }
+      if (m < 0) { m += 12; y--; }
+
+      document.getElementById('t-yrs').textContent = String(y).padStart(2, '0');
+      document.getElementById('t-mos').textContent = String(m).padStart(2, '0');
+      document.getElementById('t-days').textContent = String(d).padStart(2, '0');
+      document.getElementById('t-hrs').textContent = String(now.getHours()).padStart(2, '0');
+      document.getElementById('t-min').textContent = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('t-sec').textContent = String(now.getSeconds()).padStart(2, '0');
+    }
+
+    /* -----------------------------------------------
+       WEB AUDIO MUSIC BOX
+       ----------------------------------------------- */
+    const musicBox = {
+      ctx: null, playing: false, timeouts: [],
+      init() {
+        if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      },
+      note(freq, start, dur) {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(0, start);
+        gain.gain.linearRampToValueAtTime(0.2, start + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+        osc.connect(gain); gain.connect(this.ctx.destination);
+        osc.start(start); osc.stop(start + dur);
+      },
+      play() {
+        if (this.playing) { this.stop(); return; }
+        this.init();
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        this.playing = true;
+
+        const bpm = 110, beat = 60 / bpm;
+        const C5=523.25,D5=587.33,E5=659.25,F5=698.46,G5=783.99,A5=880,Bb5=932.33,C6=1046.5;
+        const melody = [
+          {f:C5,d:0.75},{f:C5,d:0.25},{f:D5,d:1},{f:C5,d:1},{f:F5,d:1},{f:E5,d:2},
+          {f:C5,d:0.75},{f:C5,d:0.25},{f:D5,d:1},{f:C5,d:1},{f:G5,d:1},{f:F5,d:2},
+          {f:C5,d:0.75},{f:C5,d:0.25},{f:C6,d:1},{f:A5,d:1},{f:F5,d:1},{f:E5,d:1},{f:D5,d:1},
+          {f:Bb5,d:0.75},{f:Bb5,d:0.25},{f:A5,d:1},{f:F5,d:1},{f:G5,d:1},{f:F5,d:2}
+        ];
+
+        let t = this.ctx.currentTime + 0.1;
+        const bars = document.querySelectorAll('.m-bar');
+        bars.forEach(b => b.classList.add('active'));
+
+        melody.forEach(n => {
+          this.note(n.f, t, n.d * beat * 0.95);
+          t += n.d * beat;
+        });
+
+        const endT = setTimeout(() => {
+          this.playing = false;
+          bars.forEach(b => b.classList.remove('active'));
+          document.getElementById('music-btn').textContent = '🎵 Play';
+        }, (t - this.ctx.currentTime) * 1000);
+        this.timeouts.push(endT);
+
+        document.getElementById('music-btn').textContent = '⏸️ Stop';
+      },
+      stop() {
+        this.playing = false;
+        this.timeouts.forEach(id => clearTimeout(id));
+        this.timeouts = [];
+        document.querySelectorAll('.m-bar').forEach(b => b.classList.remove('active'));
+        if (this.ctx) { this.ctx.close(); this.ctx = null; }
+        document.getElementById('music-btn').textContent = '🎵 Play';
+      }
+    };
+
+    function toggleMusic() { musicBox.play(); }
+
+    /* -----------------------------------------------
+       FLOATING BACKGROUND PARTICLES
+       ----------------------------------------------- */
+    function initParticles() {
+      const shapes = ['❤️','✨','🌸','💖','⭐','🌙'];
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        p.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.animationDelay = Math.random() * 10 + 's';
+        p.style.fontSize = (Math.random() * 14 + 14) + 'px';
+        p.style.setProperty('--drift', (Math.random() * 120 - 60) + 'px');
+        document.body.appendChild(p);
+      }
+    }
+
+    /* -----------------------------------------------
+       SPARKLE CURSOR TRAIL
+       ----------------------------------------------- */
+    function initSparkleCursor() {
+      const canvas = document.getElementById('sparkle-canvas');
+      const ctx = canvas.getContext('2d');
+      let sparks = [];
+
+      function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+
+      window.addEventListener('mousemove', e => {
+        for (let i = 0; i < 2; i++) {
+          sparks.push({
+            x: e.clientX, y: e.clientY,
+            vx: (Math.random()-0.5)*2.5, vy: (Math.random()-0.5)*2.5-1,
+            size: Math.random()*3.5+1.5, alpha: 1,
+            color: ['#F7D6C8','#E5A9A9','#C87A80','#E5C384'][Math.floor(Math.random()*4)]
+          });
+        }
+      });
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = sparks.length - 1; i >= 0; i--) {
+          const s = sparks[i];
+          ctx.globalAlpha = s.alpha;
+          ctx.fillStyle = s.color;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          ctx.fill();
+          s.x += s.vx; s.y += s.vy;
+          s.alpha -= 0.025; s.size *= 0.97;
+          if (s.alpha <= 0 || s.size < 0.4) sparks.splice(i, 1);
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+  </script>
+</body>
+</html>
