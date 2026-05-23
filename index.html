@@ -538,17 +538,19 @@
 
     .book-photo {
       width: 85%; max-width: 200px;
-      aspect-ratio: 3/4;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 8px 25px rgba(94, 61, 58, 0.15);
       border: 4px solid white;
       margin-bottom: 10px;
+      background: #f5e8e4;
     }
 
     .book-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
+      width: 100%; height: auto;
+      display: block;
+      object-fit: contain;
+      max-height: 320px;
     }
 
     .book-photo-label {
@@ -1066,9 +1068,12 @@
         justify-content: flex-start;
       }
       .book-photo {
-        width: 65%;
-        max-width: 160px;
+        width: 75%;
+        max-width: 150px;
         margin-bottom: 8px;
+      }
+      .book-photo img {
+        max-height: 220px;
       }
       .book-photo-label { font-size: 14px; }
       .book-letter-title { font-size: 18px; margin-bottom: 8px; }
