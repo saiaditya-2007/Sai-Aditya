@@ -1377,12 +1377,20 @@
               <textarea id="qa1" placeholder="Write your dream gift here..."></textarea>
             </div>
             <div class="qa-item">
-              <label>✨ What things should I upgrade or change about myself?</label>
-              <textarea id="qa2" placeholder="Be honest, Moonuu! I can handle it 😄"></textarea>
+              <label>🎂 What is your biggest birthday wish this year?</label>
+              <textarea id="qa2" placeholder="Dream big, TeJuuuuuu! ✨"></textarea>
             </div>
             <div class="qa-item">
-              <label>💭 What's one thing you've always wanted to tell me?</label>
-              <textarea id="qa3" placeholder="This is your safe space, TeJuuuuuu..."></textarea>
+              <label>🌟 If you could spend your birthday doing ANYTHING, what would it be?</label>
+              <textarea id="qa3" placeholder="Describe your perfect birthday day..."></textarea>
+            </div>
+            <div class="qa-item">
+              <label>🍰 What's your dream birthday cake or favourite food/treat?</label>
+              <textarea id="qa4" placeholder="Make me hungry! 😋"></textarea>
+            </div>
+            <div class="qa-item">
+              <label>🥳 Rate this birthday surprise out of 10 — and tell me why!</label>
+              <textarea id="qa5" placeholder="Be honest Moonuu... 😄"></textarea>
             </div>
           </div>
 
@@ -1750,17 +1758,21 @@
       const a1 = document.getElementById('qa1').value.trim();
       const a2 = document.getElementById('qa2').value.trim();
       const a3 = document.getElementById('qa3').value.trim();
+      const a4 = document.getElementById('qa4').value.trim();
+      const a5 = document.getElementById('qa5').value.trim();
 
-      if (!a1 && !a2 && !a3) {
+      if (!a1 && !a2 && !a3 && !a4 && !a5) {
         alert("Please answer at least one question before sending! 🥺");
         return;
       }
 
       const msg =
         `🎂 *Birthday Answers from TeJuuuuuu* 🌕\n\n` +
-        `🎁 *What gift should you give me?*\n${a1 || "Not answered yet..."}\n\n` +
-        `✨ *What should you upgrade or change?*\n${a2 || "Not answered yet..."}\n\n` +
-        `💭 *What I always wanted to tell you:*\n${a3 || "Not answered yet..."}\n\n` +
+        `🎁 *What gift should you give me?*\n${a1 || "Not answered..."}\n\n` +
+        `🎂 *My biggest birthday wish this year:*\n${a2 || "Not answered..."}\n\n` +
+        `🌟 *My perfect birthday would be:*\n${a3 || "Not answered..."}\n\n` +
+        `🍰 *My dream birthday cake/food:*\n${a4 || "Not answered..."}\n\n` +
+        `🥳 *Rating this surprise:*\n${a5 || "Not answered..."}\n\n` +
         `💌 Sent with love from the birthday website 🌙`;
 
       const url = `https://wa.me/${ADITYA_WHATSAPP}?text=${encodeURIComponent(msg)}`;
