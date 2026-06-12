@@ -1031,6 +1031,29 @@
 
     .site-footer span { color: var(--rose-gold-dark); font-size: 16px; }
 
+    /* WhatsApp Send Button */
+    .whatsapp-send-btn {
+      padding: 16px 38px;
+      border: none; border-radius: 50px;
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: white; font-family: inherit;
+      font-weight: 700; font-size: 16px;
+      cursor: pointer; letter-spacing: 0.5px;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+      animation: waPulse 2s ease-in-out infinite;
+    }
+
+    .whatsapp-send-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 14px 35px rgba(37, 211, 102, 0.55);
+    }
+
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); }
+      50% { box-shadow: 0 8px 35px rgba(37, 211, 102, 0.7), 0 0 20px rgba(37, 211, 102, 0.2); }
+    }
+
     /* ============================================
        RESPONSIVE
        ============================================ */
@@ -1351,16 +1374,26 @@
           <div class="qa-list">
             <div class="qa-item">
               <label>🎁 What gift should I give you this year, TeJuuuuuu?</label>
-              <textarea placeholder="Write your dream gift here..."></textarea>
+              <textarea id="qa1" placeholder="Write your dream gift here..."></textarea>
             </div>
             <div class="qa-item">
               <label>✨ What things should I upgrade or change about myself?</label>
-              <textarea placeholder="Be honest, Moonuu! I can handle it 😄"></textarea>
+              <textarea id="qa2" placeholder="Be honest, Moonuu! I can handle it 😄"></textarea>
             </div>
             <div class="qa-item">
               <label>💭 What's one thing you've always wanted to tell me?</label>
-              <textarea placeholder="This is your safe space, TeJuuuuuu..."></textarea>
+              <textarea id="qa3" placeholder="This is your safe space, TeJuuuuuu..."></textarea>
             </div>
+          </div>
+
+          <!-- WhatsApp Submit Button -->
+          <div style="text-align:center; margin-top: 28px;">
+            <button class="whatsapp-send-btn" onclick="sendToWhatsApp()">
+              💬 Send Answers to Aditya
+            </button>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">
+              This will open WhatsApp with your answers 💌
+            </p>
           </div>
         </div>
       </section>
@@ -1706,6 +1739,33 @@
     };
 
     function toggleMusic() { musicBox.play(); }
+
+    /* -----------------------------------------------
+       WHATSAPP ANSWER SENDER
+       ----------------------------------------------- */
+    // CHANGE THIS to update Aditya's WhatsApp number
+    const ADITYA_WHATSAPP = "918247849072";
+
+    function sendToWhatsApp() {
+      const a1 = document.getElementById('qa1').value.trim();
+      const a2 = document.getElementById('qa2').value.trim();
+      const a3 = document.getElementById('qa3').value.trim();
+
+      if (!a1 && !a2 && !a3) {
+        alert("Please answer at least one question before sending! 🥺");
+        return;
+      }
+
+      const msg =
+        `🎂 *Birthday Answers from TeJuuuuuu* 🌕\n\n` +
+        `🎁 *What gift should you give me?*\n${a1 || "Not answered yet..."}\n\n` +
+        `✨ *What should you upgrade or change?*\n${a2 || "Not answered yet..."}\n\n` +
+        `💭 *What I always wanted to tell you:*\n${a3 || "Not answered yet..."}\n\n` +
+        `💌 Sent with love from the birthday website 🌙`;
+
+      const url = `https://wa.me/${ADITYA_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
 
     /* -----------------------------------------------
        FLOATING BACKGROUND PARTICLES
