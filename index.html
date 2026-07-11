@@ -868,7 +868,98 @@
       box-shadow: var(--shadow-card);
     }
 
+    /* ============================================
+       ONLINE MEMORIES SECTION
+       ============================================ */
+    .online-timeline {
+      display: flex; flex-direction: column;
+      gap: 30px;
+    }
+
+    .online-card {
+      display: flex; gap: 24px; align-items: center;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+
+    .online-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-deep);
+    }
+
+    .online-card-reverse {
+      flex-direction: row-reverse;
+    }
+
+    .online-card-img {
+      width: 45%; flex-shrink: 0;
+      overflow: hidden;
+      max-height: 260px;
+    }
+
+    .online-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .online-card:hover .online-card-img img {
+      transform: scale(1.05);
+    }
+
+    .online-card-content {
+      padding: 28px 24px;
+      flex: 1;
+    }
+
+    .online-card-icon {
+      font-size: 36px; margin-bottom: 10px;
+    }
+
+    .online-card-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 3vw, 22px);
+      color: var(--text-coffee);
+      margin-bottom: 10px;
+    }
+
+    .online-card-content p {
+      font-size: 14px; line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .online-card-tag {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 5px 14px;
+      background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-pink-deep) 100%);
+      border-radius: 30px;
+      font-size: 12px; font-weight: 700;
+      color: var(--rose-gold-dark);
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 600px) {
+      .online-card, .online-card-reverse {
+        flex-direction: column;
+      }
+      .online-card-img {
+        width: 100%; max-height: 200px;
+      }
+      .online-card-content { padding: 20px 16px; }
+    }
+
+    /* ============================================
+       BUCKET LIST
+       ============================================ */
     .bucket-list {
+
       display: flex; flex-direction: column;
       gap: 14px; max-width: 580px; margin: 0 auto;
     }
@@ -1333,6 +1424,54 @@
             </div>
             <div class="polaroid-caption">Day 6 — Besties forever 💖</div>
           </div>
+        </div>
+      </section>
+
+      <!-- ONLINE MEMORIES SECTION -->
+      <section>
+        <div class="section-header">
+          <h2>When Online Became Our World 📱</h2>
+          <p>From the exam hall to our screens — the friendship only grew stronger 💫</p>
+        </div>
+
+        <div class="online-timeline">
+
+          <div class="online-card">
+            <div class="online-card-img">
+              <img src="online1.png" alt="Instagram chats">
+            </div>
+            <div class="online-card-content">
+              <div class="online-card-icon">📸</div>
+              <h3>Late Night Instagram DMs</h3>
+              <p>Those endless IG chats that started after exams and never really stopped. Hours of talking, laughing, reacting to each other's stories — distance meant nothing!</p>
+              <div class="online-card-tag">Instagram 💜</div>
+            </div>
+          </div>
+
+          <div class="online-card online-card-reverse">
+            <div class="online-card-img">
+              <img src="online2.png" alt="Snapchat streaks">
+            </div>
+            <div class="online-card-content">
+              <div class="online-card-icon">👻</div>
+              <h3>Snapchat Streaks & Silly Snaps</h3>
+              <p>Random snaps at the most random times. Funny faces, random moments, and keeping that streak alive because breaking it was NOT an option! 🔥</p>
+              <div class="online-card-tag">Snapchat 💛</div>
+            </div>
+          </div>
+
+          <div class="online-card">
+            <div class="online-card-img">
+              <img src="online3.png" alt="Board exam prep calls">
+            </div>
+            <div class="online-card-content">
+              <div class="online-card-icon">📞</div>
+              <h3>Board Exam Study Calls</h3>
+              <p>Late nights, open textbooks, and each other on a call. Studying felt less scary when you were there. Half studying, half talking — but somehow it worked! 📚✨</p>
+              <div class="online-card-tag">Study Buddies 🌙</div>
+            </div>
+          </div>
+
         </div>
       </section>
 
