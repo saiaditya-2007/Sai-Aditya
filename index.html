@@ -1208,9 +1208,260 @@
       /* Music */
       .music-widget { bottom: 12px; right: 12px; padding: 6px 12px; }
     }
+    /* ============================================
+       LOADING SCREEN
+       ============================================ */
+    #loading-screen {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: linear-gradient(160deg, #FFFDFB 0%, #FFF0EC 50%, #FFE4DF 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 99999;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    #loading-screen.fade-out {
+      opacity: 0; pointer-events: none; transform: scale(1.05);
+    }
+    .loader-heart {
+      font-size: 60px;
+      animation: heartBeat 0.8s ease-in-out infinite;
+    }
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+    .loader-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(22px, 5vw, 32px);
+      color: var(--rose-gold-dark);
+      margin-top: 20px;
+      animation: fadeInUp 1s ease forwards;
+    }
+    .loader-sub {
+      font-size: 13px; color: var(--text-muted);
+      margin-top: 8px; letter-spacing: 1px;
+      animation: fadeInUp 1s ease 0.3s both;
+    }
+    .loader-dots span {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--rose-gold);
+      margin: 0 3px;
+      margin-top: 18px;
+      animation: dotBounce 1.2s ease-in-out infinite;
+    }
+    .loader-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loader-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dotBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50% { transform: translateY(-10px); opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================
+       SCROLL FADE-IN ANIMATIONS
+       ============================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================
+       FLIP CARDS — THINGS I LOVE ABOUT YOU
+       ============================================ */
+    .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 18px;
+    }
+    .flip-card {
+      height: 170px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .flip-card-inner {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .flip-card:hover .flip-card-inner,
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-front, .flip-back {
+      position: absolute; width: 100%; height: 100%;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 16px;
+      text-align: center;
+    }
+    .flip-front {
+      background: linear-gradient(135deg, #FFF5F3 0%, #FFE8E4 100%);
+      border: 2px solid var(--rose-gold-light);
+      box-shadow: 0 8px 24px rgba(229,169,169,0.2);
+    }
+    .flip-front-emoji { font-size: 36px; margin-bottom: 8px; }
+    .flip-front-hint {
+      font-size: 11px; color: var(--text-muted);
+      font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .flip-back {
+      background: linear-gradient(135deg, var(--rose-gold-mid) 0%, var(--rose-gold-dark) 100%);
+      transform: rotateY(180deg);
+      box-shadow: 0 8px 24px rgba(174,88,102,0.35);
+    }
+    .flip-back-text {
+      font-family: 'Caveat', cursive;
+      font-size: 18px; color: white;
+      line-height: 1.4;
+    }
+
+    /* ============================================
+       OUR STORY TIMELINE
+       ============================================ */
+    .story-timeline {
+      position: relative;
+      display: flex; flex-direction: column;
+      gap: 0;
+      padding-left: 40px;
+    }
+    .story-timeline::before {
+      content: '';
+      position: absolute; left: 16px; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--rose-gold-light), var(--rose-gold-mid), var(--gold-warm));
+      border-radius: 3px;
+    }
+    .story-node {
+      position: relative;
+      padding: 20px 20px 20px 24px;
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+    .story-node:hover { transform: translateX(6px); }
+    .story-node::before {
+      content: '';
+      position: absolute; left: -31px; top: 24px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--rose-gold-mid);
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px var(--rose-gold-light);
+    }
+    .story-node-emoji { font-size: 28px; margin-bottom: 6px; }
+    .story-node h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; color: var(--text-coffee);
+      margin-bottom: 5px;
+    }
+    .story-node p {
+      font-size: 13px; color: var(--text-muted); line-height: 1.6;
+    }
+    .story-node-badge {
+      display: inline-block;
+      margin-top: 10px; padding: 3px 12px;
+      background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-pink-deep));
+      border-radius: 20px;
+      font-size: 11px; font-weight: 700;
+      color: var(--rose-gold-dark);
+    }
+
+    /* ============================================
+       CELEBRATION OVERLAY
+       ============================================ */
+    #celebration-overlay {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    #celebration-overlay.show {
+      opacity: 1; pointer-events: all;
+    }
+    .celebration-box {
+      background: linear-gradient(160deg, #FFF8F5 0%, #FFE8E0 100%);
+      border-radius: 28px;
+      padding: 48px 36px;
+      text-align: center;
+      max-width: 380px; width: 90%;
+      box-shadow: 0 30px 80px rgba(94,61,58,0.25);
+      animation: celebPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes celebPop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .celeb-emoji {
+      font-size: 64px;
+      animation: heartBeat 1s ease-in-out infinite;
+      display: block; margin-bottom: 16px;
+    }
+    .celeb-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(26px, 6vw, 36px);
+      color: var(--rose-gold-dark);
+      margin-bottom: 10px;
+    }
+    .celeb-sub {
+      font-size: 14px; color: var(--text-muted);
+      line-height: 1.6; margin-bottom: 24px;
+    }
+    .celeb-close-btn {
+      padding: 12px 32px;
+      border: none; border-radius: 50px;
+      background: linear-gradient(135deg, var(--rose-gold), var(--rose-gold-mid));
+      color: white; font-family: inherit;
+      font-weight: 700; font-size: 15px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(200,122,128,0.4);
+      transition: var(--transition);
+    }
+    .celeb-close-btn:hover { transform: translateY(-2px) scale(1.05); }
   </style>
 </head>
 <body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loading-screen">
+    <div class="loader-heart">🌙</div>
+    <div class="loader-text">Loading your surprise...</div>
+    <div class="loader-sub">Something special is waiting ✨</div>
+    <div class="loader-dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- CELEBRATION OVERLAY -->
+  <div id="celebration-overlay">
+    <div class="celebration-box">
+      <span class="celeb-emoji">💌</span>
+      <div class="celeb-title">Sent with love! 🌙</div>
+      <div class="celeb-sub">Thank you so much, TeJuuuuuu 🌕<br>Aditya is going to treasure every word you wrote! 💖</div>
+      <button class="celeb-close-btn" onclick="closeCelebration()">Aww, close 🥹</button>
+    </div>
+  </div>
 
   <canvas id="sparkle-canvas"></canvas>
 
@@ -1327,6 +1578,40 @@
       <div class="bday-header">
         <h1>Happy Birthday, TeJuuuuuu🌕🎉</h1>
       </div>
+
+      <!-- OUR STORY TIMELINE -->
+      <section class="fade-up">
+        <div class="section-header">
+          <h2>Our Story 🌙</h2>
+          <p>From strangers in an exam hall to forever besties 💖</p>
+        </div>
+        <div class="story-timeline">
+          <div class="story-node">
+            <div class="story-node-emoji">📝</div>
+            <h3>The Exam Hall</h3>
+            <p>6 days. Exam papers. Shy glances. Chit-chats in between. An Instagram ID exchanged. That's where it all started! 👀</p>
+            <span class="story-node-badge">Where we met 🏫</span>
+          </div>
+          <div class="story-node">
+            <div class="story-node-emoji">📱</div>
+            <h3>Online World</h3>
+            <p>IG DMs that went on for hours. Snapchat streaks we didn't dare break. The friendship grew stronger every single day! 🔥</p>
+            <span class="story-node-badge">Instagram & Snapchat 💜💛</span>
+          </div>
+          <div class="story-node">
+            <div class="story-node-emoji">📞</div>
+            <h3>Study Call Besties</h3>
+            <p>Board exams? Scary alone. Together on call? Somehow not scary at all. Books open, hearts open. 📚✨</p>
+            <span class="story-node-badge">Board Exam Crew 🌙</span>
+          </div>
+          <div class="story-node">
+            <div class="story-node-emoji">💖</div>
+            <h3>Besties Forever</h3>
+            <p>And now? You're one of the most special people in his life. Happy Birthday, TeJuuuuuu. Here's to all the chapters ahead! 🎂</p>
+            <span class="story-node-badge">Now & Always 🌕</span>
+          </div>
+        </div>
+      </section>
 
       <!-- LIVE AGE TICKER -->
       <div class="ticker-card">
@@ -1493,11 +1778,57 @@
             </div>
             <div class="bucket-item" onclick="toggleBucket(this)">
               <div class="bucket-check">♥</div>
-              <div class="bucket-text">Recreate our legendary chalkboard doodles 🎨</div>
+              <div class="bucket-text">Meet in person and talk for hours ☕</div>
             </div>
             <div class="bucket-item" onclick="toggleBucket(this)">
               <div class="bucket-check">♥</div>
               <div class="bucket-text">Write the next chapter of our inside jokes 😂</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- THINGS I LOVE ABOUT YOU -->
+      <section class="fade-up">
+        <div class="section-header">
+          <h2>Things About You 💖</h2>
+          <p>Tap each card to flip it ✨</p>
+        </div>
+        <div class="flip-grid">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-front"><div class="flip-front-emoji">😂</div><div class="flip-front-hint">Tap me!</div></div>
+              <div class="flip-back"><div class="flip-back-text">Your laugh is literally contagious 😂</div></div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-front"><div class="flip-front-emoji">✨</div><div class="flip-front-hint">Tap me!</div></div>
+              <div class="flip-back"><div class="flip-back-text">Your vibe is different from everyone else ✨</div></div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-front"><div class="flip-front-emoji">💬</div><div class="flip-front-hint">Tap me!</div></div>
+              <div class="flip-back"><div class="flip-back-text">Those random late night texts that make my day 💬</div></div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-front"><div class="flip-front-emoji">🌙</div><div class="flip-front-hint">Tap me!</div></div>
+              <div class="flip-back"><div class="flip-back-text">You're my Moon — always there even in the dark 🌙</div></div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-front"><div class="flip-front-emoji">🤝</div><div class="flip-front-hint">Tap me!</div></div>
+              <div class="flip-back"><div class="flip-back-text">You never judge — ever. That's rare and precious 🤝</div></div>
+            </div>
+          </div>
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-front"><div class="flip-front-emoji">💖</div><div class="flip-front-hint">Tap me!</div></div>
+              <div class="flip-back"><div class="flip-back-text">Just you being YOU is the best thing 💖</div></div>
             </div>
           </div>
         </div>
@@ -1757,6 +2088,8 @@
         // Start age ticker
         startTicker();
 
+        // Init scroll animations
+        initScrollAnimations();
         // Init music
         musicBox.init();
       }, 500);
@@ -1913,6 +2246,53 @@
 
       const url = `https://wa.me/${ADITYA_WHATSAPP}?text=${encodeURIComponent(msg)}`;
       window.open(url, '_blank');
+
+      // Show celebration after a short delay
+      setTimeout(showCelebration, 800);
+    }
+
+    function showCelebration() {
+      const overlay = document.getElementById('celebration-overlay');
+      overlay.classList.add('show');
+      // Big confetti burst!
+      confetti({ particleCount: 180, spread: 100, origin: { y: 0.5 }, colors: ['#E5A9A9','#C87A80','#E5C384','#F7D6C8','#AE5866'] });
+      setTimeout(() => confetti({ particleCount: 80, spread: 70, origin: { y: 0.3 }, angle: 60 }), 400);
+      setTimeout(() => confetti({ particleCount: 80, spread: 70, origin: { y: 0.3 }, angle: 120 }), 600);
+    }
+
+    function closeCelebration() {
+      document.getElementById('celebration-overlay').classList.remove('show');
+    }
+
+    /* -----------------------------------------------
+       LOADING SCREEN
+       ----------------------------------------------- */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const ls = document.getElementById('loading-screen');
+        ls.classList.add('fade-out');
+        setTimeout(() => ls.style.display = 'none', 900);
+      }, 2000);
+    });
+
+    /* -----------------------------------------------
+       SCROLL FADE-IN OBSERVER
+       ----------------------------------------------- */
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    // Observe all sections in birthday page
+    function initScrollAnimations() {
+      document.querySelectorAll('#birthday-page section, #birthday-page .ticker-card').forEach(el => {
+        el.classList.add('fade-up');
+        fadeObserver.observe(el);
+      });
     }
 
     /* -----------------------------------------------
